@@ -39,5 +39,9 @@ export async function generateStaticParams() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos/");
   const todos: Todo[] = await res.json();
 
-  return todos.map((todo) => ({ todoId: todo.id.toString }));
+  // slice data for demo propose
+  const trimmedTodos = todos.splice(0, 10);
+
+  const paths = todos.map((todo) => ({ todoId: todo.id.toString }));
+  return { paths, fallback: false };
 }
